@@ -1,6 +1,9 @@
 .miniPackage{
     // width: 350px;
     flex: 0.25;
+    @media (max-width: 768px){
+        flex: 1;
+    }
     padding: 33px 33px 53px;
     background: white;
     box-shadow: 0px 2px 12px 0px #00000029;

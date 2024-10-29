@@ -1,0 +1,51 @@
+.CProgress{
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
+}
+
+.CProgressBar{
+    display: flex;
+    // justify-content: space-between;
+    // flex-wrap: wrap;
+    align-items: center;
+    gap: 10px; 
+    width: fit-content;
+    // border: 1px solid red;
+    // padding: 20px 0;
+    margin: 20px 0;
+}
+
+
+
+// PROGRESSS COUNT
+.progressCount{
+    // border: 1px solid red;
+    // width: 100%;
+    width: 200px;
+    flex: 1 1 200px;
+
+    @media screen and (max-width: 1000px) {
+        width: 100%;
+    }
+}
+
+.progressCount__progressBar {
+    // height: 10px;
+    border-radius: 4.42px;
+    // border: 1px solid red;
+}
+
+@media screen and (max-width: 768px) {
+    .progressCount__progressBar{
+        // height: 3px;
+    }
+}
+
+.progressCount__progressBarInner{
+    div > p{
+        padding: 11px 0px 11px 40px;
+        color: white;
+    }
+}
+

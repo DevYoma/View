@@ -22,6 +22,7 @@ const Sidebar = () => {
         id: 2,
         text: "Company",
         icon: CompanyIcon,
+        route: "/company"
       },
       {
         id: 3,

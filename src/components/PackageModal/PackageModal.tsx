@@ -8,9 +8,10 @@ import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 type PackageModalProps = {
   isOpen: boolean;
   onClose: () => void;
+  onConfirm: () => void;
 };
 
-const PackageModal = ({ isOpen, onClose }: PackageModalProps) => {
+const PackageModal = ({ isOpen, onClose, onConfirm }: PackageModalProps) => {
     if (!isOpen) return null;
 
   return (
@@ -123,7 +124,10 @@ const PackageModal = ({ isOpen, onClose }: PackageModalProps) => {
               </IconButton>
             </td>
             <td>
-              <CustomButton children="Buy Now" variant="secondary" />
+              <CustomButton children="Buy Now" variant="secondary" onClick={() => {
+                onConfirm();
+                onClose();
+              }}/>
             </td>
             <td>
               <CustomButton children="Buy Now" variant="secondary" />

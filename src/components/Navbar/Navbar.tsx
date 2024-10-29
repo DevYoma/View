@@ -3,7 +3,6 @@ import SearchBar from "../../atoms/SearchBar/SearchBar";
 import "./Navbar.scss";
 import CallIcon from "@mui/icons-material/Call";
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';
-import ProfileImg from "../../assets/profileImg.png";
 import UserProfile from "../../atoms/UserProfile/UserProfile";
 import NavDrawer from "../NavDrawer/NavDrawer";
 
@@ -52,9 +51,7 @@ const Navbar = () => {
           >
             <NotificationsActiveOutlinedIcon />
           </IconButton>
-          {/* <Avatar sx={{ bgcolor: "#6200EE" }}>ZY</Avatar> */}
           <UserProfile 
-            avatarSrc={ProfileImg}
             username="ZY"
           />
         </Box>

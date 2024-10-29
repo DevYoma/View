@@ -4,12 +4,12 @@ import { LoadingProvider } from './context/LoadingContext';
 
 function App() {
   return (
-    <div className="app">
-      <LoadingProvider>
-        <Dashboard />
-      </LoadingProvider>
-    </div>
-  )
+      <div className="app">
+        <LoadingProvider>
+          <Dashboard />
+        </LoadingProvider>
+      </div>
+  );
 }
 
 export default App
