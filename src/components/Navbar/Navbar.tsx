@@ -5,11 +5,14 @@ import CallIcon from "@mui/icons-material/Call";
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';
 import ProfileImg from "../../assets/profileImg.png";
 import UserProfile from "../../atoms/UserProfile/UserProfile";
-
+import NavDrawer from "../NavDrawer/NavDrawer";
 
 const Navbar = () => {
   return (
     <div className="navbar">
+      <div className="navbarMobile">
+        <NavDrawer />
+      </div>
       <div className="navbarSearchBar">
         <SearchBar />
       </div>

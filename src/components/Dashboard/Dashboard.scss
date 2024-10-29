@@ -12,6 +12,16 @@
             display: flex;
             flex-wrap: wrap;
             gap: 26px;
+
+            & > * {
+                flex: 1 1 calc(50% - 13px); // Default for two components side by side, with a gap of 26px
+            }
+
+            @media (max-width: 768px) { // Adjust this value as needed for responsiveness
+                > * {
+                    flex: 1 1 100%; // Full width on smaller screens
+                }
+            }
         }
 
         &Content:not(:last-child){
