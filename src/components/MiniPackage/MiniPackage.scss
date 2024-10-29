@@ -1,0 +1,25 @@
+.miniPackage{
+    // width: 350px;
+    flex: 0.25;
+    padding: 33px 33px 53px;
+    background: white;
+    box-shadow: 0px 2px 12px 0px #00000029;
+    border-radius: 15px;
+
+    &Header{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &Details{
+        margin: 40px 0 2rem;
+        h2{
+            margin-bottom: 23.5px;
+        }        
+    }
+
+    &Footer{
+        display: flex;
+        gap: 12px;
+    }
+}

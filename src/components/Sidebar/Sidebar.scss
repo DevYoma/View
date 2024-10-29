@@ -1,0 +1,64 @@
+.sidebar{
+    width: 285px;
+    // border: 1px solid red;
+    background: white;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    // border: 1px solid red;
+    // display: none;
+
+    @media screen and (max-width: 1024px) {
+        display: none;
+    }
+
+    &Logo{
+        margin: 68px auto 52px;
+        text-align: center;
+    }
+
+    &Items{
+        // border: 2px solid green;
+        margin-bottom: 300px;
+    }
+
+    &Item{
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 17px 0 17px 24px;
+        margin-bottom: 12px;
+        // border: 1px solid red;
+        font-weight: 500;
+        width: 80%;
+        margin-inline: auto;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #248FF2; 
+            color: white; 
+            border-radius: 8px;
+
+            img {
+                filter: brightness(0) invert(1); 
+            }
+        }
+
+        &.active {
+            background-color: #248FF2;
+            color: white;
+            border-radius: 8px;
+
+            img {
+                filter: brightness(0) invert(1); 
+            }
+        }
+    }
+
+    &FooterLogo{
+        display: flex;
+        align-items: center;
+        margin-inline: auto;
+        font-weight: 700;
+    }
+}

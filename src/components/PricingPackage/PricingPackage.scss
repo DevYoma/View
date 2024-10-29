@@ -1,0 +1,60 @@
+.pricingPackage{
+    // border: 2px solid red;
+    // width: 724px;
+    flex: 0.75;
+    box-shadow: 0px 2px 12px 0px #00000029;
+    background: #F1F8FF;
+    padding: 40px 32px;
+    border-radius: 15px;
+
+    &Tag{
+        // border: 1px solid red;
+        background: white;
+        color: #007EF1;
+        width: fit-content;
+        padding: 10.5px 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border-radius: 8px;
+    }
+
+    &Details{
+        margin: 40px 0 2rem;
+        // border: 1px solid red;
+        color: #1C1818;
+
+        h2{
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 23.5px;
+        }
+
+        p{
+            font-weight: 400;
+            font-size: 18px;
+        }
+    }
+
+    &Footer{
+        display: flex;
+        justify-content: space-between;
+        padding: 13px 0;
+
+        & > div:first-of-type{
+            display: flex;
+            gap: 12px;
+        }
+
+        // & > div:nth-child(2){
+        //     small{
+        //         font-size: 1rem;
+        //     }
+        //     span{
+        //         color: #2A2626;
+        //         font-size: 2rem;
+        //         font-weight: 600;
+        //     }
+        // }
+    }
+}

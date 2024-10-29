@@ -1,0 +1,20 @@
+.navbar{
+    display: flex;
+    align-items:center;
+    // border: 1px solid green;
+    padding: 1rem 0;
+
+    &SearchBar{
+        flex: 1;
+        // border: 1px solid red;
+    }
+
+    &Consultation{
+        margin-left: 3.3rem;
+    }
+
+    &Right{
+        // border: 1px solid red;
+        margin-left: 1rem;
+    }
+}

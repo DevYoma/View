@@ -1,0 +1,15 @@
+.alertBanner{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 27px 1rem 38px;
+    background: #FFE7E7;
+    margin-top: 6px;
+    margin-bottom: 22px;
+    border-radius: 15px;
+
+    p{
+        color: #2A2626;
+        font-size: 20px;
+    }
+}

@@ -1,0 +1,21 @@
+.dashboard{
+    display: flex;
+    background: #F8F8F8;
+
+    &Main{
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto; 
+        // border: 1px solid red;
+
+        &Content{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 26px;
+        }
+
+        &Content:not(:last-child){
+            margin-bottom: 26px;
+        }
+    }
+}
