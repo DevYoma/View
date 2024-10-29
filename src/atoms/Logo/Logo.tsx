@@ -1,6 +1,5 @@
 import "./Logo.scss"
 import OneTapLogo from "../../assets/Logo.png";
-import MiniLogo from "../../assets/miniLogo.png";
 import SupportLogo from "../../assets/supportLogo.png";
 
 type Props = {

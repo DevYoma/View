@@ -1,6 +1,5 @@
 import { Drawer, IconButton } from "@mui/material";
-import React, { useState } from "react";
-// import "./LPNavDrawer.scss";
+import { useState } from "react";
 import { Box } from "@mui/system";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
