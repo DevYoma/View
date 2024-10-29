@@ -2,6 +2,10 @@
     display: flex;
     background: #F8F8F8;
 
+    &.alternateContent {
+        background: #FFFFFF;
+    }
+
     &Main{
         flex: 1;
         padding: 20px;

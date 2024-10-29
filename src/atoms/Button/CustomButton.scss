@@ -2,6 +2,7 @@ $primary: white;
 $secondary: #34393E;
 $outline: #E5F2FF;
 $transparent: transparent;
+$industry: rgba(248, 248, 248, 1);
 
 .button {
   // padding: 10px 20px;
@@ -9,6 +10,13 @@ $transparent: transparent;
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+
+  &Icon{
+    margin-right: 8px;
+  }
 
   &:hover {
     opacity: 0.8;
@@ -27,6 +35,11 @@ $transparent: transparent;
   &--outline {
     background-color: $outline;
     color: #2A2626;
+  }
+
+  &--industry{
+    background-color: $industry;
+    color: rgba(0, 0, 0, 1);
   }
 
   &--small {

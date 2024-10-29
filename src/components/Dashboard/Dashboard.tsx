@@ -14,6 +14,7 @@ import LampImg from "../../assets/lampImg.png";
 import BriefCaseImg from "../../assets/briefcaseImg.png";
 import FilterIcon from "../../assets/filter.png";
 import Company from "../Company/Company";
+import classNames from "classnames";
 
 const Dashboard = () => {  
   const { loading, setLoading } = useLoading();
@@ -40,8 +41,13 @@ const Dashboard = () => {
     }, 3000);
   };
 
+  
+  const dashboardClasses = classNames("dashboard", {
+    alternateContent: showOtherContent,
+  });
+
   return (
-    <div className="dashboard">
+    <div className={dashboardClasses}>
       {loading && <LoadingOverlay />}
       <PackageModal
         isOpen={isModalOpen}
