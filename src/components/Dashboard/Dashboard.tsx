@@ -19,7 +19,7 @@ import classNames from "classnames";
 const Dashboard = () => {  
   const { loading, setLoading } = useLoading();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [showOtherContent, setShowOtherContent] = useState(false);
+  const [showOtherContent, setShowOtherContent] = useState(!false);
 
   useEffect(() => {
     if (!loading && isModalOpen) {
@@ -74,6 +74,7 @@ const Dashboard = () => {
                 name="Business Elite Package"
                 description="Premium business support with company setup, end-to-end compliance, accounting, and payroll solutions"
                 price="7,628"
+                isPopular={true}
               />
               <MiniPackage
                 onButtonClick={handleButtonClick}

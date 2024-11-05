@@ -4,6 +4,10 @@
     // border: 1px solid green;
     padding: 1rem 0;
 
+    @media screen and (max-width: 768px) {
+        // padding: 0.5rem 0;
+    }
+
     &Mobile{
          display: none;
 
@@ -18,14 +22,27 @@
     &SearchBar{
         flex: 1;
         // border: 1px solid red;
+
+        @media screen and (max-width: 768px) {
+            // display: none;
+        }
     }
 
     &Consultation{
         margin-left: 3.3rem;
+
+        @media screen and (max-width: 768px) {
+            display: none;
+        }
     }
 
     &Right{
         // border: 1px solid red;
         margin-left: 1rem;
+
+        @media screen and (max-width: 500px) {
+            // border: 1px solid red;
+            display: none;
+        }
     }
 }

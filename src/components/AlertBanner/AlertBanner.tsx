@@ -9,8 +9,9 @@ const AlertBanner = () => {
       <p>
         Please provide your company details to seamlessly access our services.
       </p>
-      <div className="alertBannerButton">
+      <div>
         <Button
+          className="alertBannerButton"
           variant="contained"
           sx={{
             backgroundColor: "white",

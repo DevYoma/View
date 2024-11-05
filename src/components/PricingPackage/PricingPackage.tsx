@@ -10,18 +10,14 @@ type Props = {
   description: string;
   price: string;
   onButtonClick: () => void;
+  isPopular?:boolean;
 }
 
-const PricingPackage = ({ tagName, tagIcon, name, description, price, onButtonClick }: Props) => {
-  // const { setLoading } = useLoading();
-
-  // const handleButtonClick = () => {
-  //   setLoading(true);
-  //   setTimeout(() => setLoading(false), 3000);
-  // }
-
+const PricingPackage = ({ tagName, tagIcon, name, description, price, onButtonClick, isPopular }: Props) => {
   return (
     <div className="pricingPackage">
+
+      {isPopular && <div className="popularTag">Popular</div>}
       <div className="pricingPackageTag">
         <img src={tagIcon} alt={tagName} />
         <span>{tagName}</span>

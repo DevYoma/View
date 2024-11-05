@@ -69,6 +69,7 @@ const CIndustries = () => {
       <div className="CIndustriesList">
         {lists.map((list) => (
           <CustomButton
+            key={list.id}
             children={list.name}
             variant="primary"
             icon={<AddIcon />}
