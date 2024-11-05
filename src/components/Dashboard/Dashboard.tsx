@@ -19,7 +19,7 @@ import classNames from "classnames";
 const Dashboard = () => {  
   const { loading, setLoading } = useLoading();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [showOtherContent, setShowOtherContent] = useState(!false);
+  const [showOtherContent, setShowOtherContent] = useState(false);
 
   useEffect(() => {
     if (!loading && isModalOpen) {
