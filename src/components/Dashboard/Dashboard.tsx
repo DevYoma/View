@@ -15,11 +15,35 @@ import BriefCaseImg from "../../assets/briefcaseImg.png";
 import FilterIcon from "../../assets/filter.png";
 import Company from "../Company/Company";
 import classNames from "classnames";
+import { getPackages } from "../../services/api";
+
+type APIPackageType = {
+  _id: string;
+  packagePrice: string;
+  packageName: string;
+  packageDescription: string;
+}
 
 const Dashboard = () => {  
   const { loading, setLoading } = useLoading();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showOtherContent, setShowOtherContent] = useState(false);
+  const [packages, setPackages] = useState<APIPackageType[]>([]);
+
+  useEffect(() => {
+    const fetchPackages = async () => {
+      try {
+        const data = await getPackages();
+        setPackages(data);  
+        console.log(data);
+      } catch (err) {
+        console.error("Error fetching packages:", err);
+      }
+    };
+
+    fetchPackages();
+  
+  }, []);
 
   useEffect(() => {
     if (!loading && isModalOpen) {
@@ -67,40 +91,56 @@ const Dashboard = () => {
             <Navbar />
             <AlertBanner />
             <div className="dashboardMainContent">
-              <PricingPackage
-                onButtonClick={handleButtonClick}
-                tagIcon={CrownImg}
-                tagName="All Inclusive Solution"
-                name="Business Elite Package"
-                description="Premium business support with company setup, end-to-end compliance, accounting, and payroll solutions"
-                price="7,628"
-                isPopular={true}
-              />
-              <MiniPackage
-                onButtonClick={handleButtonClick}
-                icon={BriefCaseImg}
-                name="Incorporation Package"
-                description="Effortless business setup with our all-inclusive incorporation services"
-                price="770"
-              />
+              {packages.length > 0 && 
+                packages.slice(0, 2).map((pkg, index) => {
+                  return index % 2 === 0 ? (
+                    <PricingPackage
+                      key={pkg._id}
+                      onButtonClick={handleButtonClick}
+                      tagIcon={CrownImg}
+                      tagName={"All Inclusive Solution"}
+                      name={pkg.packageName}
+                      description={pkg.packageDescription}
+                      price={pkg.packagePrice}
+                      isPopular={true}
+                    />
+                  ) : (
+                    <MiniPackage
+                      key={pkg._id}
+                      onButtonClick={handleButtonClick}
+                      icon={BriefCaseImg}
+                      name={pkg.packageName}
+                      description={pkg.packageDescription}
+                      price={pkg.packagePrice}
+                    />
+                  );
+                })
+              }
             </div>
             <div className="dashboardMainContent">
-              <PricingPackage
-                onButtonClick={handleButtonClick}
-                tagIcon={LampImg}
-                tagName="Great for Startups"
-                name="Founders Starter Package"
-                description="Kickstart your business with hassle-free company registration and streamlined compliance."
-                price="2,885"
-              />
-              <MiniPackage
-                onButtonClick={handleButtonClick}
-                icon={FilterIcon}
-                name="Personalized Package"
-                description="Design your own package with services customized for your needs."
-                // price="770"
-                singleButton
-              />
+                {packages.length > 2 &&
+                  packages.slice(2).map((pkg, index) => {
+                    return index % 2 === 0 ? (
+                      <PricingPackage
+                        key={pkg._id}
+                        onButtonClick={handleButtonClick}
+                        tagIcon={LampImg}
+                        tagName={pkg.packageName}
+                        name={pkg.packageName}
+                        description={pkg.packageDescription}
+                        price={pkg.packagePrice}
+                      />
+                    ) : (
+                      <MiniPackage
+                        key={pkg._id}
+                        onButtonClick={handleButtonClick}
+                        icon={FilterIcon}
+                        name={pkg.packageName}
+                        description={pkg.packageDescription}
+                        price={pkg.packagePrice}
+                      />
+                    );
+                  })}
             </div>
             <Footer />
           </>

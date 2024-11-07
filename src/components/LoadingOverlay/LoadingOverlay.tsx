@@ -21,24 +21,3 @@ const LoadingOverlay = () => (
 );
 
 export default LoadingOverlay;
-
-// // Main Component
-// const App: React.FC = () => {
-//   const [loading, setLoading] = useState(false);
-
-//   const handleButtonClick = () => {
-//     setLoading(true);
-//     setTimeout(() => setLoading(false), 3000); // Stop loading after 3 seconds
-//   };
-
-//   return (
-//     <div>
-//       <Button variant="contained" onClick={handleButtonClick}>
-//         Show Loading Overlay
-//       </Button>
-//       {loading && <LoadingOverlay />}
-//     </div>
-//   );
-// };
-
-// export default App;

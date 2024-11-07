@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CustomButton from "../../../atoms/Button/CustomButton";
 import "./CIndustries.scss";
 import AddIcon from '@mui/icons-material/Add';
@@ -6,56 +6,73 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import CharacterCount from "../../CharacterCount/CharacterCount";
 import { Button, IconButton } from "@mui/material";
 import Footer from "../../Footer/Footer";
+import { getIndustryLists } from "../../../services/api";
 
 const CIndustries = () => {
     const [textAreaText,setTextAreaText] = useState("");
     const [visaNumber, setVisaNumber] = useState(0);
-    const lists = [
-      {
-        id: 1,
-        name: "Healthcare",
-      },
-      {
-        id: 2,
-        name: "Manufacturing",
-      },
-      {
-        id: 3,
-        name: "Professional Services",
-      },
-      {
-        id: 4,
-        name: "Information Technology",
-      },
-      {
-        id: 5,
-        name: "Finance and Insurance",
-      },
-      {
-        id: 6,
-        name: "Construction and Real Estate",
-      },
-      {
-        id: 7,
-        name: "Commerce and Retail",
-      },
-      {
-        id: 8,
-        name: "Education",
-      },
-      {
-        id: 9,
-        name: "Logistics and Transportation",
-      },
-      {
-        id: 10,
-        name: "Tourism and Hospitality",
-      },
-      {
-        id: 11, 
-        name: "Others"
-      },
-    ];
+    //  
+    //   {
+    //     id: 1,
+    //     name: "Healthcare",
+    //   },
+    //   {
+    //     id: 2,
+    //     name: "Manufacturing",
+    //   },
+    //   {
+    //     id: 3,
+    //     name: "Professional Services",
+    //   },
+    //   {
+    //     id: 4,
+    //     name: "Information Technology",
+    //   },
+    //   {
+    //     id: 5,
+    //     name: "Finance and Insurance",
+    //   },
+    //   {
+    //     id: 6,
+    //     name: "Construction and Real Estate",
+    //   },
+    //   {
+    //     id: 7,
+    //     name: "Commerce and Retail",
+    //   },
+    //   {
+    //     id: 8,
+    //     name: "Education",
+    //   },
+    //   {
+    //     id: 9,
+    //     name: "Logistics and Transportation",
+    //   },
+    //   {
+    //     id: 10,
+    //     name: "Tourism and Hospitality",
+    //   },
+    //   {
+    //     id: 11, 
+    //     name: "Others"
+    //   },
+    // ];
+    const [lists, setLists] = useState([])
+
+    useEffect(() => {
+      const fetchPackages = async () => {
+      try {
+        const data = await getIndustryLists();
+        setLists(data);  
+        console.log(data);
+      } catch (err) {
+        console.error("Error fetching packages:", err);
+      }
+    };
+
+    fetchPackages();
+  
+  }, []);
 
     const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setTextAreaText(e.target.value)
