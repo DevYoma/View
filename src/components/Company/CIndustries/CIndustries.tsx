@@ -7,63 +7,35 @@ import CharacterCount from "../../CharacterCount/CharacterCount";
 import { Button, IconButton } from "@mui/material";
 import Footer from "../../Footer/Footer";
 import { getIndustryLists } from "../../../services/api";
+import CheckIcon from "@mui/icons-material/Check";
+import ClearIcon from "@mui/icons-material/Clear";
+
+type IndustryAPIType = {
+  _id: string; 
+  id: number;
+  name: string;
+}
 
 const CIndustries = () => {
-    const [textAreaText,setTextAreaText] = useState("");
-    const [visaNumber, setVisaNumber] = useState(0);
-    //  
-    //   {
-    //     id: 1,
-    //     name: "Healthcare",
-    //   },
-    //   {
-    //     id: 2,
-    //     name: "Manufacturing",
-    //   },
-    //   {
-    //     id: 3,
-    //     name: "Professional Services",
-    //   },
-    //   {
-    //     id: 4,
-    //     name: "Information Technology",
-    //   },
-    //   {
-    //     id: 5,
-    //     name: "Finance and Insurance",
-    //   },
-    //   {
-    //     id: 6,
-    //     name: "Construction and Real Estate",
-    //   },
-    //   {
-    //     id: 7,
-    //     name: "Commerce and Retail",
-    //   },
-    //   {
-    //     id: 8,
-    //     name: "Education",
-    //   },
-    //   {
-    //     id: 9,
-    //     name: "Logistics and Transportation",
-    //   },
-    //   {
-    //     id: 10,
-    //     name: "Tourism and Hospitality",
-    //   },
-    //   {
-    //     id: 11, 
-    //     name: "Others"
-    //   },
-    // ];
-    const [lists, setLists] = useState([])
+  const [textAreaText, setTextAreaText] = useState("");
+  const [visaNumber, setVisaNumber] = useState(0);
+  const [lists, setLists] = useState<IndustryAPIType[]>([]);
+  const [selectedIndustries, setSelectedIndustries] = useState<string[]>([]);
 
-    useEffect(() => {
-      const fetchPackages = async () => {
+  const options = [
+    "Option 1",
+    "Option 2",
+    "Option 3",
+    "Option 4",
+    "Option 5",
+    "Option 6",
+  ];
+
+  useEffect(() => {
+    const fetchPackages = async () => {
       try {
         const data = await getIndustryLists();
-        setLists(data);  
+        setLists(data);
         console.log(data);
       } catch (err) {
         console.error("Error fetching packages:", err);
@@ -71,17 +43,43 @@ const CIndustries = () => {
     };
 
     fetchPackages();
-  
   }, []);
 
-    const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setTextAreaText(e.target.value)
-    }
+  const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setTextAreaText(e.target.value);
+  };
+
+   const handleIndustryClick = (industryName: string) => {
+     setSelectedIndustries(
+       (prevSelected) =>
+         prevSelected?.includes(industryName)
+           ? prevSelected.filter((item) => item !== industryName) // Remove if already selected
+           : [...prevSelected, industryName] // Add if not selected
+     );
+   };
+
+
   return (
     <div className="CIndustries">
       <p className="CIndustriesHeader">
         Please Select the Industries/Sectors Aligned with Your Business
       </p>
+
+      {/* I need to have a div here, now what that div would do is onclick of any button, it shows the clicked list here */}
+      <div className="CIndustriesSelected">
+        {selectedIndustries.length > 0
+          ? selectedIndustries.map((industry, index) => (
+              <CustomButton
+                key={index}
+                children={industry}
+                variant="selectedIndustry"
+                icon={<ClearIcon />}
+                onClick={() => handleIndustryClick(industry)} // Deselect on click & try to update active state
+              />
+            ))
+          : // <p>No industries selected</p>
+            null}
+      </div>
 
       <div className="CIndustriesList">
         {lists.map((list) => (
@@ -90,6 +88,8 @@ const CIndustries = () => {
             children={list.name}
             variant="primary"
             icon={<AddIcon />}
+            activeIcon={<CheckIcon />}
+            onClick={() => handleIndustryClick(list.name)}
           />
         ))}
       </div>
@@ -149,16 +149,52 @@ const CIndustries = () => {
                 fontWeight: "500",
                 fontSize: "18px",
                 textTransform: "none",
-                boxShadow: "none"
+                boxShadow: "none",
               }}
             >
               Cost: $00.00
             </Button>
           </div>
         </div>
+
+        <div className="CIndustriesUae">
+          <h1>Do you wish to sell or buy goods and services within U.A.E</h1>
+
+          <div>
+            <CustomButton children="Yes" variant="primary" />
+            <CustomButton children="No" variant="primary" />
+          </div>
+        </div>
+
+        <div className="CIndustriesOptions">
+          {/* <BasicCheckboxes /> */}
+          <div className="checkbox-container">
+            {options.map((option, index) => (
+              <label key={index} className="checkbox-label">
+                <input type="checkbox" className="checkbox-input" />
+                {option}
+              </label>
+            ))}
+          </div>
+        </div>
+
+        <div className="CIndustriesLocation">
+          <h1>Do you have a location in mind</h1>
+          {/* The below should be a select fieldd */}
+          <CustomButton children="Yes" variant="primary" />
+        </div>
+
+        <div className="CIndustriesTurnover">
+          <h1>Will your company's turnover exceed 3 million AED?</h1>
+          <div>
+            <CustomButton children="Yes" variant="primary" />
+            <CustomButton children="No" variant="primary" />
+            <CustomButton children="Not sure" variant="primary" />
+          </div>
+        </div>
       </div>
 
-      <Footer isButtonAvailable={true}/>
+      <Footer isButtonAvailable={true} />
     </div>
   );
 }

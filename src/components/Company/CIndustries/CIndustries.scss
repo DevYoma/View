@@ -9,6 +9,13 @@
         font-weight: 500;
     }
 
+    &Selected{
+        // border: 1px solid black;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
     &List{
         margin-top: 1rem;
         // border: 1px solid red;
@@ -63,4 +70,6 @@
             }
         }
     }
+
+    
 }
