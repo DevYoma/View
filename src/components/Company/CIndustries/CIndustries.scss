@@ -60,7 +60,7 @@
                 font-size: 20px;
                 color: rgba(28, 24, 24, 1);
                 margin-bottom: 30px;
-                font-weight: 500px;
+                font-weight: 500;
             }
 
             &Container{
@@ -71,5 +71,117 @@
         }
     }
 
-    
+    &Uae{
+        // border: 1px solid red;
+        background: rgba(248, 248, 248, 1);
+        padding: 1rem 20px;
+        border-radius: 15px;
+        margin-bottom: 28px;
+
+        p{
+            font-size: 24px;
+            color: rgba(28, 24, 24, 1);
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        div{
+            display: flex;
+            gap: 12px;
+        }
+    }
+
+    &Options{
+        background: rgba(248, 248, 248, 1);
+        padding: 1rem 20px;
+        border-radius: 15px;
+        margin-bottom: 28px;
+        // border: 1px solid red;
+        p{
+            font-size: 24px;
+            color: rgba(28, 24, 24, 1);
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        & > .checkbox-container{
+            display: flex;
+            flex-wrap: wrap;
+            row-gap: 2rem;
+            margin-bottom: 1.5rem;
+            label{
+                flex: 1 0 30%;
+                font-size: 20px;
+
+                input{
+                    margin-right: 1rem;
+                    border: 1px solid red;
+                    width: 17px;
+                    height: 17px;
+                }
+
+                input:checked{
+                }
+            }
+        }
+    }
+
+    &Location{
+        border: 1px solid blue;
+        background: rgba(248, 248, 248, 1);
+        padding: 1rem 20px;
+        border-radius: 15px;
+        margin-bottom: 28px;
+
+        p{
+            font-size: 24px;
+            color: rgba(28, 24, 24, 1);
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        & > .location-container{
+            margin-top: 1.5rem;
+
+            span{
+                // margin-bottom: 1rem;
+
+            }
+
+            div{
+                margin-top: 10px;
+                display: flex;
+                gap: 1rem;
+
+                input{
+                    width: 300px;
+                    border: none;
+                    outline: none;
+                    border-radius: 15px;
+                    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+                    padding: 0 1rem;
+                }
+            }
+        }
+    }
+
+    &Turnover{
+        border: 1px solid orange;
+        background: rgba(248, 248, 248, 1);
+        padding: 1rem 20px;
+        border-radius: 15px;
+        margin-bottom: 28px;
+
+        p{
+            font-size: 24px;
+            color: rgba(28, 24, 24, 1);
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        div{
+            display: flex;
+            gap: 12px;
+        }
+    }
 }

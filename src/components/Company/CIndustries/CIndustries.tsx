@@ -22,14 +22,14 @@ const CIndustries = () => {
   const [lists, setLists] = useState<IndustryAPIType[]>([]);
   const [selectedIndustries, setSelectedIndustries] = useState<string[]>([]);
 
-  const options = [
-    "Option 1",
-    "Option 2",
-    "Option 3",
-    "Option 4",
-    "Option 5",
-    "Option 6",
-  ];
+  // const options = [
+  //   "Option 1",
+  //   "Option 2",
+  //   "Option 3",
+  //   "Option 4",
+  //   "Option 5",
+  //   "Option 6",
+  // ];
 
   useEffect(() => {
     const fetchPackages = async () => {
@@ -156,41 +156,75 @@ const CIndustries = () => {
             </Button>
           </div>
         </div>
+      </div>
 
-        <div className="CIndustriesUae">
-          <h1>Do you wish to sell or buy goods and services within U.A.E</h1>
+      <div className="CIndustriesUae">
+        <p>Do you wish to sell or buy goods and services within U.A.E?</p>
 
-          <div>
-            <CustomButton children="Yes" variant="primary" />
-            <CustomButton children="No" variant="primary" />
-          </div>
-        </div>
-
-        <div className="CIndustriesOptions">
-          {/* <BasicCheckboxes /> */}
-          <div className="checkbox-container">
-            {options.map((option, index) => (
-              <label key={index} className="checkbox-label">
-                <input type="checkbox" className="checkbox-input" />
-                {option}
-              </label>
-            ))}
-          </div>
-        </div>
-
-        <div className="CIndustriesLocation">
-          <h1>Do you have a location in mind</h1>
-          {/* The below should be a select fieldd */}
+        <div>
           <CustomButton children="Yes" variant="primary" />
+          <CustomButton children="No" variant="primary" />
         </div>
+      </div>
 
-        <div className="CIndustriesTurnover">
-          <h1>Will your company's turnover exceed 3 million AED?</h1>
+      <div className="CIndustriesOptions">
+        <p>Do you wish to have any of the following?</p>
+        {/* <BasicCheckboxes /> */}
+        <div className="checkbox-container">
+          <label className="checkbox-label">
+            <input type="checkbox" className="checkbox-input" />
+            {"Retail Shop"}
+          </label>
+          <label className="checkbox-label">
+            <input type="checkbox" className="checkbox-input" />
+            {"Virtual Office Space"}
+          </label>
+
+          <label className="checkbox-label">
+            <input type="checkbox" className="checkbox-input" />
+            {"Industrial Area"}
+          </label>
+
+          <label className="checkbox-label">
+            <input type="checkbox" className="checkbox-input" />
+            {"Warehouse"}
+          </label>
+
+          <label className="checkbox-label">
+            <input type="checkbox" className="checkbox-input" />
+            {"Physical Office Space"}
+          </label>
+
+          <label className="checkbox-label">
+            <input type="checkbox" className="checkbox-input" />
+            {"None"}
+          </label>
+        </div>
+      </div>
+
+      <div className="CIndustriesLocation">
+        <p>Do you have any preferred location in mind?</p> 
+        {/* have a details icon beside the above */}
+
+        <CustomButton children="Yes" variant="primary" />
+
+        {/* location */}
+        <div className="location-container">
+          <small>Location</small>
           <div>
-            <CustomButton children="Yes" variant="primary" />
-            <CustomButton children="No" variant="primary" />
-            <CustomButton children="Not sure" variant="primary" />
+            <input type="search" placeholder="Add Location" />
+            {/* create a selectable boolean prop, and make Icon and {...others} not change if selectable */}
+            <CustomButton children="Add" icon={<AddIcon />} variant="formSelect"/> 
           </div>
+        </div>
+      </div>
+
+      <div className="CIndustriesTurnover">
+        <p>Will your company's turnover exceed 3 million AED?</p>
+        <div>
+          <CustomButton children="Yes" variant="primary" />
+          <CustomButton children="No" variant="primary" />
+          <CustomButton children="Not sure" variant="primary" />
         </div>
       </div>
 

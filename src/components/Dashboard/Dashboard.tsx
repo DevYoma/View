@@ -27,7 +27,7 @@ type APIPackageType = {
 const Dashboard = () => {  
   const { loading, setLoading } = useLoading();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [showOtherContent, setShowOtherContent] = useState(false);
+  const [showOtherContent, setShowOtherContent] = useState(!false);
   const [packages, setPackages] = useState<APIPackageType[]>([]);
 
   useEffect(() => {

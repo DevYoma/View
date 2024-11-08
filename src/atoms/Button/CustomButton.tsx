@@ -3,7 +3,7 @@ import "./CustomButton.scss";
 
 interface ButtonProps {
   children: React.ReactNode;
-  variant?: "primary" | "secondary" | "outline" | "transparent" | "industry" | "selectedIndustry";
+  variant?: "primary" | "secondary" | "outline" | "transparent" | "industry" | "selectedIndustry" | "formSelect";
   size?: "small" | "medium" | "large"; 
   disabled?: boolean; 
   onClick?: () => void;

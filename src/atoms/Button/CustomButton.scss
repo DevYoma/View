@@ -3,6 +3,7 @@ $secondary: #34393E;
 $outline: #E5F2FF;
 $transparent: transparent;
 $industry: rgba(248, 248, 248, 1);
+$lightBlue: #2E95F4;
 
 .button {
   // padding: 10px 20px;
@@ -20,6 +21,11 @@ $industry: rgba(248, 248, 248, 1);
 
   &:hover {
     opacity: 0.8;
+  }
+
+  &--formSelect{
+    background-color: $lightBlue;
+    color: white; 
   }
 
   &--primary {
