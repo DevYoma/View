@@ -10,6 +10,7 @@ import { getIndustryLists } from "../../../services/api";
 import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
 import RadioInput from "../../../atoms/RadioInput/RadioInput";
+import axios from "axios";
 
 type IndustryAPIType = {
   _id: string; 
@@ -29,7 +30,7 @@ type FormData = {
 }
 
 const CIndustries = () => {
-  const [selectedIndustries, setSelectedIndustries] = useState([]);
+  const [selectedIndustries, setSelectedIndustries] = useState<string[]>([]);
   const [aboutBusiness, setAboutBusiness] = useState(""); // For Goods, Services, Trading
   const [textAreaText, setTextAreaText] = useState("");
   const [visaNumber, setVisaNumber] = useState(0);
@@ -78,10 +79,10 @@ const CIndustries = () => {
     setTurnOver(value);
   };
   
-  const handleLocationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setLocations((prevLocations) => [...prevLocations, value]);
-  };
+  // const handleLocationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const value = e.target.value;
+  //   setLocations((prevLocations) => [...prevLocations, value]);
+  // };
 
   const handleAddLocation = () => {
     if (locationInput.trim() !== "") {
@@ -110,7 +111,7 @@ const CIndustries = () => {
 
 
   // Submit handler (for demonstration)
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Collect data into an object or use the state variables directly
     const formData: FormData = {
@@ -125,6 +126,20 @@ const CIndustries = () => {
     };
     console.log("Form Submitted with data:", formData);
     // Implement submission logic here
+
+    try {
+      const response = await axios.post("http://localhost:5000/api/business", formData);
+      console.log("Response:", response.data);
+
+      if(response.status === 201){
+        alert("Data submitted successfully");
+      }else{
+        alert("Failed to save data!")
+      }
+    } catch (error) {
+      console.log("Error:", error);
+      alert("An error occured while submitting the form")
+    }
   };
 
   return (
