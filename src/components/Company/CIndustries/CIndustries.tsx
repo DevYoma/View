@@ -9,6 +9,7 @@ import Footer from "../../Footer/Footer";
 import { getIndustryLists } from "../../../services/api";
 import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
+import RadioInput from "../../../atoms/RadioInput/RadioInput";
 
 type IndustryAPIType = {
   _id: string; 
@@ -16,20 +17,28 @@ type IndustryAPIType = {
   name: string;
 }
 
+type FormData = {
+  selectedIndustries: string[];
+  aboutBusiness: string;
+  textAreaText: string;
+  visaNumber: number;
+  uae: string;
+  optionsbox: string[];
+  locations: string[];
+  turnOver: string;
+}
+
 const CIndustries = () => {
+  const [selectedIndustries, setSelectedIndustries] = useState([]);
+  const [aboutBusiness, setAboutBusiness] = useState(""); // For Goods, Services, Trading
   const [textAreaText, setTextAreaText] = useState("");
   const [visaNumber, setVisaNumber] = useState(0);
+  const [uae, setUae] = useState(""); // Yes or No for selling/buying within U.A.E.
+  const [optionsbox, setOptionsbox] = useState<string[]>([]); // For checkboxes
+  const [locations, setLocations] = useState<string[]>([]);
+  const [locationInput, setLocationInput] = useState<string>("");
+  const [turnOver, setTurnOver] = useState(""); // Yes, No, Not Sure for turnover
   const [lists, setLists] = useState<IndustryAPIType[]>([]);
-  const [selectedIndustries, setSelectedIndustries] = useState<string[]>([]);
-
-  // const options = [
-  //   "Option 1",
-  //   "Option 2",
-  //   "Option 3",
-  //   "Option 4",
-  //   "Option 5",
-  //   "Option 6",
-  // ];
 
   useEffect(() => {
     const fetchPackages = async () => {
@@ -45,22 +54,81 @@ const CIndustries = () => {
     fetchPackages();
   }, []);
 
+    const handleIndustryClick = (industry: string) => {
+      setSelectedIndustries((prevIndustries) =>
+        prevIndustries.includes(industry)
+          ? prevIndustries.filter((item) => item !== industry)
+          : [...prevIndustries, industry]
+      );
+    };
+
+  const handleAboutBusinessChange = (value: string) => {
+    setAboutBusiness(value);
+  };
+
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTextAreaText(e.target.value);
   };
 
-   const handleIndustryClick = (industryName: string) => {
-     setSelectedIndustries(
-       (prevSelected) =>
-         prevSelected?.includes(industryName)
-           ? prevSelected.filter((item) => item !== industryName) // Remove if already selected
-           : [...prevSelected, industryName] // Add if not selected
-     );
-   };
+  const handleUaeChange = (value: string) => {
+    setUae(value);
+  };
 
+  const handleTurnOverChange = (value: string) => {
+    setTurnOver(value);
+  };
+  
+  const handleLocationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setLocations((prevLocations) => [...prevLocations, value]);
+  };
+
+  const handleAddLocation = () => {
+    if (locationInput.trim() !== "") {
+      // Add location to the locations array
+      setLocations((prevLocations) => [
+        ...prevLocations,
+        locationInput.trim(),
+      ]);
+      setLocationInput(""); // Clear the input field after adding
+    }
+  };
+
+  const handleRemoveLocation = (loc: string) => {
+    setLocations((prevLocations) =>
+      prevLocations.filter((location) => location !== loc)
+    );
+  };
+
+  // Handle Checkbox options
+  const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, checked } = event.target;
+    setOptionsbox((prevOptions) =>
+      checked ? [...prevOptions, value] : prevOptions.filter((option) => option !== value)
+    );
+  };
+
+
+  // Submit handler (for demonstration)
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // Collect data into an object or use the state variables directly
+    const formData: FormData = {
+      selectedIndustries, 
+      aboutBusiness, 
+      textAreaText, 
+      visaNumber,
+      uae, 
+      optionsbox, 
+      locations, 
+      turnOver
+    };
+    console.log("Form Submitted with data:", formData);
+    // Implement submission logic here
+  };
 
   return (
-    <div className="CIndustries">
+    <form className="CIndustries" onSubmit={handleSubmit}>
       <p className="CIndustriesHeader">
         Please Select the Industries/Sectors Aligned with Your Business
       </p>
@@ -101,14 +169,22 @@ const CIndustries = () => {
         </p>
 
         <div className="CIndustriesAboutButtons">
-          <CustomButton children="Goods" variant="industry" />
-          <CustomButton children="Services" variant="industry" />
-          <CustomButton children="Trading" variant="industry" />
+          <RadioInput
+            name="about"
+            options={[
+              { label: "Goods", value: "goods" },
+              { label: "Services", value: "services" },
+              { label: "Trading", value: "trading" },
+            ]}
+            selectedValue={aboutBusiness}
+            onChange={handleAboutBusinessChange}
+          />
         </div>
 
         <div className="CIndustriesAboutTextArea">
           <textarea
             placeholder="Enter your business details here...."
+            value={textAreaText}
             onChange={handleTextChange}
             maxLength={100}
           />
@@ -162,8 +238,15 @@ const CIndustries = () => {
         <p>Do you wish to sell or buy goods and services within U.A.E?</p>
 
         <div>
-          <CustomButton children="Yes" variant="primary" />
-          <CustomButton children="No" variant="primary" />
+          <RadioInput
+            name="uae"
+            options={[
+              { label: "Yes", value: "yes" },
+              { label: "No", value: "no" },
+            ]}
+            selectedValue={uae}
+            onChange={handleUaeChange}
+          />
         </div>
       </div>
 
@@ -172,26 +255,56 @@ const CIndustries = () => {
         {/* <BasicCheckboxes /> */}
         <div className="checkbox-container">
           <label className="checkbox-label">
-            <input type="checkbox" className="checkbox-input" />
+            <input
+              type="checkbox"
+              className="checkbox-input"
+              value="Retail Shop"
+              checked={optionsbox.includes("Retail Shop")}
+              onChange={handleOptionChange}
+            />
             {"Retail Shop"}
           </label>
           <label className="checkbox-label">
-            <input type="checkbox" className="checkbox-input" />
+            <input
+              type="checkbox"
+              className="checkbox-input"
+              value="Virtual Office Space"
+              checked={optionsbox.includes("Virtual Office Space")}
+              onChange={handleOptionChange}
+            />
             {"Virtual Office Space"}
           </label>
 
           <label className="checkbox-label">
-            <input type="checkbox" className="checkbox-input" />
+            <input
+              type="checkbox"
+              className="checkbox-input"
+              value="Physical Office Space"
+              checked={optionsbox.includes("Physical Office Space")}
+              onChange={handleOptionChange}
+            />
             {"Industrial Area"}
           </label>
 
           <label className="checkbox-label">
-            <input type="checkbox" className="checkbox-input" />
+            <input
+              type="checkbox"
+              className="checkbox-input"
+              value="Warehouse"
+              checked={optionsbox.includes("Warehouse")}
+              onChange={handleOptionChange}
+            />
             {"Warehouse"}
           </label>
 
           <label className="checkbox-label">
-            <input type="checkbox" className="checkbox-input" />
+            <input
+              type="checkbox"
+              className="checkbox-input"
+              value="None"
+              checked={optionsbox.includes("None")}
+              onChange={handleOptionChange}
+            />
             {"Physical Office Space"}
           </label>
 
@@ -203,18 +316,52 @@ const CIndustries = () => {
       </div>
 
       <div className="CIndustriesLocation">
-        <p>Do you have any preferred location in mind?</p> 
+        <p>Do you have any preferred location in mind?</p>
         {/* have a details icon beside the above */}
 
-        <CustomButton children="Yes" variant="primary" />
+        {/* <RadioInput
+          name="location"
+          options={[{ label: "Yes", value: "yes" }]}
+          selectedValue={locations.length > 0 ? "yes" : ""}
+          onChange={handleLocationChange}
+        /> */}
 
-        {/* location */}
+        {/* location add button*/}
         <div className="location-container">
           <small>Location</small>
           <div>
-            <input type="search" placeholder="Add Location" />
+            <div className="location-containerInput">
+              <input
+                type="text"
+                placeholder="Add Location"
+                value={locationInput}
+                onChange={(e) => setLocationInput(e.target.value)}
+              />
+              {locations.length > 0 && (
+                <div className="added-locations">
+                  {/* <p>Added Locations:</p> */}
+                  {locations?.map((loc, index) => (
+                    <div key={index} className="location-item">
+                      <span>{loc}</span>
+                      <IconButton onClick={() => handleRemoveLocation(loc)}>
+                        <ClearIcon />
+                      </IconButton>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
             {/* create a selectable boolean prop, and make Icon and {...others} not change if selectable */}
-            <CustomButton children="Add" icon={<AddIcon />} variant="formSelect"/> 
+
+            <CustomButton
+              children="Add"
+              icon={<AddIcon />}
+              variant="formSelect"
+              onClick={handleAddLocation}
+              // selectable={true} // write this again
+            />
+
+            {/* <button onClick={handleAddLocation}>Add</button> */}
           </div>
         </div>
       </div>
@@ -222,14 +369,23 @@ const CIndustries = () => {
       <div className="CIndustriesTurnover">
         <p>Will your company's turnover exceed 3 million AED?</p>
         <div>
-          <CustomButton children="Yes" variant="primary" />
-          <CustomButton children="No" variant="primary" />
-          <CustomButton children="Not sure" variant="primary" />
+          <RadioInput
+            name="turnover"
+            options={[
+              { label: "Yes", value: "yes" },
+              { label: "No", value: "no" },
+              { label: "Not Sure", value: "not-sure" },
+            ]}
+            selectedValue={turnOver}
+            onChange={handleTurnOverChange}
+          />
         </div>
       </div>
 
+      <button type="submit">Save</button>
+
       <Footer isButtonAvailable={true} />
-    </div>
+    </form>
   );
 }
 

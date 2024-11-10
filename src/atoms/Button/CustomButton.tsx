@@ -12,7 +12,7 @@ interface ButtonProps {
   activeIcon?: React.ReactNode;
 }
 
-const CustomButton = ({ icon, children, size="medium", variant="primary", disabled, onClick, style, activeIcon }: ButtonProps) => {
+const CustomButton = ({ icon, children, size="medium", variant="primary", disabled, onClick, style, activeIcon, }: ButtonProps) => {
   const [isActive, setIsActive] = useState(false);
 
   const handleClick = () => {
