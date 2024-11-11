@@ -115,30 +115,44 @@ const CIndustries = () => {
     e.preventDefault();
     // Collect data into an object or use the state variables directly
     const formData: FormData = {
-      selectedIndustries, 
-      aboutBusiness, 
-      textAreaText, 
+      selectedIndustries,
+      aboutBusiness,
+      textAreaText,
       visaNumber,
-      uae, 
-      optionsbox, 
-      locations, 
-      turnOver
+      uae,
+      optionsbox,
+      locations,
+      turnOver,
     };
+
+    
+    for (const [key, value] of Object.entries(formData)) {
+      if (!value || value === "") {
+        alert(`Please fill in the ${key} field.`);
+        return;
+      }
+    }
+
+    // implement logic for val. checkboxes
+
     console.log("Form Submitted with data:", formData);
     // Implement submission logic here
 
     try {
-      const response = await axios.post("http://localhost:5000/api/business", formData);
+      const response = await axios.post(
+        "http://localhost:5000/api/business",
+        formData
+      );
       console.log("Response:", response.data);
 
-      if(response.status === 201){
+      if (response.status === 201) {
         alert("Data submitted successfully");
-      }else{
-        alert("Failed to save data!")
+      } else {
+        alert("Failed to save data!");
       }
     } catch (error) {
       console.log("Error:", error);
-      alert("An error occured while submitting the form")
+      alert("An error occured while submitting the form");
     }
   };
 
@@ -397,7 +411,15 @@ const CIndustries = () => {
         </div>
       </div>
 
-      <button type="submit">Save</button>
+      {/* <button type="submit">Save</button> */}
+      <CustomButton 
+        children="Save" 
+        variant="secondary" 
+        type="submit"
+        style={{
+          marginBottom: "1rem"
+        }}
+      />
 
       <Footer isButtonAvailable={true} />
     </form>

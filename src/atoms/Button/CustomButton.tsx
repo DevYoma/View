@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./CustomButton.scss";
 
 interface ButtonProps {
@@ -10,9 +10,10 @@ interface ButtonProps {
   style?: React.CSSProperties;
   icon?: React.ReactNode;
   activeIcon?: React.ReactNode;
+  type?: 'button' | 'submit';
 }
 
-const CustomButton = ({ icon, children, size="medium", variant="primary", disabled, onClick, style, activeIcon, }: ButtonProps) => {
+const CustomButton = React.memo(({ icon, children, size="medium", variant="primary", disabled, onClick, style, activeIcon, type='button' }: ButtonProps) => {
   const [isActive, setIsActive] = useState(false);
 
   const handleClick = () => {
@@ -27,12 +28,13 @@ const CustomButton = ({ icon, children, size="medium", variant="primary", disabl
       disabled={disabled}
       className={buttonClasses}
       style={style}
+      type={type}
     >
       {/* {icon && <span className="buttonIcon">{icon}</span>} */}
       {isActive ? <span className="buttonIcon">{activeIcon}</span> : <span className="buttonIcon">{icon}</span>}
       {children}
     </button>
   );
-}
+})
 
 export default CustomButton

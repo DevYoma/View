@@ -6,6 +6,7 @@ import CustomButton from "../../atoms/Button/CustomButton";
 
 type Prop = {
   isButtonAvailable?: boolean;
+  formSubmit?: () => void;
 }
 
 const Footer = ({ isButtonAvailable }: Prop) => {
